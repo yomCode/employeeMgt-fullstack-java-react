@@ -4,9 +4,6 @@ import EmployeeService from '../services/EmployeeService';
 import Button from './Button';
 
 
-// const CREATE_EMPLOYEE_ROUTE = "/api/v1/admin/add-employees";
-
-
 const ListEmployee = () => {
 
     const navigate = useNavigate();
@@ -29,7 +26,7 @@ const ListEmployee = () => {
         fetchData();
     }, []);
 
-    
+
     const updateEmployee = (e, id) => {
         e.preventDefault();
         navigate(`/updateEmployee/${id}`);
@@ -39,7 +36,7 @@ const ListEmployee = () => {
         e.preventDefault();
         navigate(`/getEmployee/${id}`);
     }
-    
+
 
     const deleteEmployee = (e, id) => {
         e.preventDefault();
@@ -53,7 +50,7 @@ const ListEmployee = () => {
     }
 
     return(
-        <div> 
+        <div className='flex flex-col gap-4'>
             <h2 className='text-center' >Employee List</h2>
             <div>
                 <button className='btn btn-primary' onClick={() => navigate("/addEmployee")}>Add new Employee</button>
@@ -61,41 +58,41 @@ const ListEmployee = () => {
             <div className='row'>
                 <table className='table table-striped table-bordered'>
                     <thead>
-                        <tr>
-                            <th className='text-center'>S/N</th>
-                            <th className='text-center'>Employee First Name</th>
-                            <th className='text-center'>Employee Last Name</th>
-                            <th className='text-center'>Employee Email</th>
-                            <th className='text-center'>Action</th>
-                        </tr>
+                    <tr>
+                        <th className='text-center'>S/N</th>
+                        <th className='text-center'>Employee First Name</th>
+                        <th className='text-center'>Employee Last Name</th>
+                        <th className='text-center'>Employee Email</th>
+                        <th className='text-center'>Action</th>
+                    </tr>
                     </thead>
                     {
                         !loading && (
                             <tbody>
-                                {
-                                    employees.map((employee) => (
+                            {
+                                employees.map((employee) => (
 
-                                <tr key = {employee.id}> 
-                                    <td> {employees.indexOf(employee) + 1} </td>
-                                    <td>{employee.firstName}</td>
-                                    <td>{employee.lastName}</td>
-                                    <td>{employee.email}</td>
-                                    <td>
-                                    <div className='col d-flex justify-content-around'>
-                                        <Button type="button"  title = "Delete" classAttr='btn btn-danger' click={(e, id) => deleteEmployee(e, employee.id)} />
-                                        <Button type="button" title = "Edit" classAttr='btn btn-primary' click={(e, id) => updateEmployee(e, employee.id)} />
-                                        <Button type="button" title = "View" classAttr='btn btn-info' click={(e, id) => getEmployee(e, employee.id)} />
-                                    </div>
-                                    
-                                    </td>
-                                </tr>
-                                        
-                                    ))
-                                }
-                       
-                    
+                                    <tr key = {employee.id}>
+                                        <td> {employees.indexOf(employee) + 1} </td>
+                                        <td>{employee.firstName}</td>
+                                        <td>{employee.lastName}</td>
+                                        <td>{employee.email}</td>
+                                        <td>
+                                            <div className='col d-flex justify-content-around'>
+                                                <Button type="button"  title = "Delete" classAttr='btn btn-danger' click={(e, id) => deleteEmployee(e, employee.id)} />
+                                                <Button type="button" title = "Edit" classAttr='btn btn-primary' click={(e, id) => updateEmployee(e, employee.id)} />
+                                                <Button type="button" title = "View" classAttr='btn btn-info' click={(e, id) => getEmployee(e, employee.id)} />
+                                            </div>
+
+                                        </td>
+                                    </tr>
+
+                                ))
+                            }
+
+
                             </tbody>
-                     )}
+                        )}
                 </table>
             </div>
         </div>
