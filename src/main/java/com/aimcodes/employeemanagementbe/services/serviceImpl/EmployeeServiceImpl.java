@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -36,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public String deleteEmployee(Long id){
-        Employee employee = employeeRepository.findById(id).orElseThrow();
+        Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         employeeRepository.delete(employee);
 
@@ -46,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public String updateEmployee(Long id, UpdateEmployeeRequest request){
-        Employee employee = employeeRepository.findById(id).orElseThrow();
+        Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
         employee.setFirstName(request.getFirstName());
         employee.setLastName(request.getLastName());
@@ -67,7 +68,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee viewEmployee(Long id){
-       Employee employee = employeeRepository.findById(id).orElseThrow();
+       Employee employee = employeeRepository.findById(id).orElseThrow(NoSuchElementException::new);
 
        return employee;
     }
